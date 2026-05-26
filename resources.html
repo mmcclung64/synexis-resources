@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synexis Partner Resources</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* ── Header ────────────────────────────────────────────────────────── */
+    header {
+      background: #0b1f3a;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    header img { height: 32px; }
+    header h1 {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Gate cards ─────────────────────────────────────────────────────── */
+    .gate-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 70px);
+      padding: 40px 16px;
+    }
+    .gate-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      padding: 44px 48px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+    .gate-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0b1f3a;
+    }
+    .gate-card p {
+      font-size: .9rem;
+      color: #555;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .gate-card input[type="text"],
+    .gate-card input[type="email"],
+    .gate-card input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #d0d5dd;
+      border-radius: 8px;
+      font-size: .95rem;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .gate-card input:focus { border-color: #0b6fba; }
+    .gate-card .btn {
+      width: 100%;
+      padding: 13px;
+      background: #0b6fba;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .gate-card .btn:hover { background: #0a5fa5; }
+    .gate-card .btn:disabled { background: #a0bdd8; cursor: default; }
+    .error-msg {
+      color: #c0392b;
+      font-size: .85rem;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+    .name-row { display: flex; gap: 10px; }
+    .name-row input { margin-bottom: 14px; }
+
+    /* ── Resources page ─────────────────────────────────────────────────── */
+    #resources-page { display: none; }
+
+    .page-header {
+      background: #0b1f3a;
+      color: #fff;
+      padding: 32px 48px 28px;
+    }
+    .page-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .page-header p  { font-size: .9rem; opacity: .7; }
+
+    .resources-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 32px 64px;
+    }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #888;
+      margin: 32px 0 14px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .doc-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: box-shadow .15s, transform .15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .doc-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,.12);
+      transform: translateY(-2px);
+    }
+    .doc-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .file-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      flex-shrink: 0;
+      color: #fff;
+    }
+    .file-icon.pdf  { background: #e74c3c; }
+    .file-icon.pptx { background: #d35400; }
+    .file-icon.docx { background: #2980b9; }
+    .file-icon.xlsx { background: #27ae60; }
+    .file-icon.default { background: #7f8c8d; }
+
+    .doc-name {
+      font-size: .9rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: #0b1f3a;
+      flex: 1;
+    }
+    .doc-meta {
+      font-size: .78rem;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .doc-meta .dot { opacity: .4; }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #f0f4f9;
+      color: #0b6fba;
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
+      align-self: flex-start;
+    }
+    .download-btn:hover { background: #dae6f5; }
+
+    .loading-msg {
+      text-align: center;
+      padding: 60px;
+      color: #888;
+      font-size: .95rem;
+    }
+    .empty-msg {
+      text-align: center;
+      padding: 60px;
+      color: #aaa;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header (always visible) ─────────────────────────────────────── -->
+<header>
+  <h1>Synexis Partner Resources</h1>
+</header>
+
+<!-- ── Step 1: Access key ──────────────────────────────────────────── -->
+<div id="step-key" class="gate-wrap">
+  <div class="gate-card">
+    <h2>Partner Access</h2>
+    <p>Enter the access key provided by your Synexis contact to continue.</p>
+    <input type="password" id="key-input" placeholder="Access key" autocomplete="off" />
+    <button class="btn" id="key-btn" onclick="checkKey()">Continue</button>
+    <div class="error-msg" id="key-error"></div>
+  </div>
+</div>
+
+<!-- ── Step 2: Email ────────────────────────────────────────────────── -->
+<div id="step-email" class="gate-wrap" style="display:none">
+  <div class="gate-card">
+    <h2>Who's accessing?</h2>
+    <p>Enter your name and work email. This helps Synexis keep access current.</p>
+    <div class="name-row">
+      <input type="text" id="first-name" placeholder="First name" />
+      <input type="text" id="last-name"  placeholder="Last name" />
+    </div>
+    <input type="email" id="email-input" placeholder="Work email" />
+    <button class="btn" id="email-btn" onclick="submitEmail()">View Resources</button>
+    <div class="error-msg" id="email-error"></div>
+  </div>
+</div>
+
+<!-- ── Resources page ───────────────────────────────────────────────── -->
+<div id="resources-page">
+  <div class="page-header">
+    <h2>Marketing Resources</h2>
+    <p>Click any document to download. All materials are for partner use only.</p>
+  </div>
+  <div class="resources-body">
+    <div id="card-container" class="loading-msg">Loading resources…</div>
+  </div>
+</div>
+
+<script>
+  // ── Configuration ──────────────────────────────────────────────────
+  const ACCESS_KEY      = "vincit2026";          // rotate this when needed
+  const HS_PORTAL_ID    = "243636346";
+  const HS_FORM_GUID    = "29b0a418-3ee2-42de-b613-da1461b333dc";
+  const MANIFEST_URL    = "./resources_manifest.json";
+
+  // ── Step 1: Key check ──────────────────────────────────────────────
+  document.getElementById("key-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkKey();
+  });
+
+  function checkKey() {
+    const val = document.getElementById("key-input").value.trim();
+    if (val === ACCESS_KEY) {
+      document.getElementById("step-key").style.display   = "none";
+      document.getElementById("step-email").style.display = "flex";
+      document.getElementById("first-name").focus();
+    } else {
+      document.getElementById("key-error").textContent = "Incorrect key — check with your Synexis contact.";
+    }
+  }
+
+  // ── Step 2: Email submission ───────────────────────────────────────
+  document.getElementById("email-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") submitEmail();
+  });
+
+  async function submitEmail() {
+    const email     = document.getElementById("email-input").value.trim();
+    const firstName = document.getElementById("first-name").value.trim();
+    const lastName  = document.getElementById("last-name").value.trim();
+    const errEl     = document.getElementById("email-error");
+    const btn       = document.getElementById("email-btn");
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = "Please enter a valid work email.";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Logging access…";
+    errEl.textContent = "";
+
+    // Submit to HubSpot form (v2 endpoint — consistent with training site)
+    const fields = [{ name: "email", value: email }];
+    if (firstName) fields.push({ name: "firstname", value: firstName });
+    if (lastName)  fields.push({ name: "lastname",  value: lastName  });
+
+    try {
+      await fetch(
+        `https://forms.hubspot.com/uploads/form/v2/${HS_PORTAL_ID}/${HS_FORM_GUID}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ ...Object.fromEntries(fields.map(f => [f.name, f.value])) }),
+        }
+      );
+    } catch (err) {
+      // Non-blocking — if HubSpot is unreachable, still let the rep through
+      console.warn("HubSpot form submission failed:", err);
+    }
+
+    // Gate passed
+    document.getElementById("step-email").style.display = "none";
+    document.getElementById("resources-page").style.display = "block";
+    loadResources();
+  }
+
+  // ── Resource loading ───────────────────────────────────────────────
+  async function loadResources() {
+    const container = document.getElementById("card-container");
+    let manifest;
+    try {
+      const resp = await fetch(MANIFEST_URL + "?t=" + Date.now());
+      if (!resp.ok) throw new Error("manifest not found");
+      manifest = await resp.json();
+    } catch (err) {
+      container.innerHTML = '<div class="empty-msg">Resources unavailable. Please check back soon.</div>';
+      return;
+    }
+
+    const files = manifest.files || [];
+    if (!files.length) {
+      container.innerHTML = '<div class="empty-msg">No resources available yet.</div>';
+      return;
+    }
+
+    // Group: root files first, then by subfolder
+    const rootFiles = files.filter(f => !f.subfolder);
+    const subfolders = {};
+    files.filter(f => f.subfolder).forEach(f => {
+      (subfolders[f.subfolder] = subfolders[f.subfolder] || []).push(f);
+    });
+
+    let html = "";
+    if (rootFiles.length) {
+      html += `<div class="section-label">Documents</div>`;
+      html += `<div class="card-grid">${rootFiles.map(cardHTML).join("")}</div>`;
+    }
+    for (const [folder, items] of Object.entries(subfolders)) {
+      html += `<div class="section-label">${escHtml(folder)}</div>`;
+      html += `<div class="card-grid">${items.map(cardHTML).join("")}</div>`;
+    }
+
+    container.className = "";
+    container.innerHTML = html;
+  }
+
+  function cardHTML(file) {
+    const ext   = (file.extension || "").toLowerCase();
+    const size  = formatBytes(file.size_bytes);
+    const icon  = iconLabel(ext);
+    const cls   = ["pdf","pptx","docx","xlsx"].includes(ext) ? ext : "default";
+    const date  = file.updated_at ? new Date(file.updated_at).toLocaleDateString("en-US", { month:"short", year:"numeric" }) : "";
+
+    return `
+      <div class="doc-card">
+        <div class="doc-card-top">
+          <div class="file-icon ${cls}">${icon}</div>
+          <div class="doc-name">${escHtml(file.display_name)}</div>
+        </div>
+        <div class="doc-meta">
+          <span>${size}</span>
+          ${date ? `<span class="dot">·</span><span>${date}</span>` : ""}
+        </div>
+        <a class="download-btn" href="${escHtml(file.hubspot_url)}" target="_blank" rel="noopener noreferrer">
+          ↓ Download ${ext.toUpperCase()}
+        </a>
+      </div>`;
+  }
+
+  function iconLabel(ext) {
+    return { pdf:"PDF", pptx:"PPT", ppt:"PPT", docx:"DOC", doc:"DOC", xlsx:"XLS", xls:"XLS" }[ext] || ext.toUpperCase() || "FILE";
+  }
+
+  function formatBytes(bytes) {
+    if (!bytes) return "";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+  }
+
+  function escHtml(str) {
+    return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+</script>
+
+</body>
+</html>
