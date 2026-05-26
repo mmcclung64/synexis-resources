@@ -5,43 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Synexis Partner Resources</title>
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ── Brand tokens ──────────────────────────────────────────────────── */
+    :root {
+      --navy:       #002e6d;
+      --navy-dark:  #16292f;
+      --cyan:       #5fd0e0;
+      --bg:         #e8eff0;
+      --gray-100:   #f4f4f4;
+      --gray-200:   #e6e6e6;
+      --gray-500:   #6c757d;
+      --white:      #fff;
+    }
+
     /* ── Reset & base ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f5f6f8;
+      font-family: "Roboto", Arial, sans-serif;
+      background: var(--bg);
       color: #1a1a2e;
       min-height: 100vh;
     }
 
     /* ── Header ────────────────────────────────────────────────────────── */
     header {
-      background: #0b1f3a;
-      padding: 18px 32px;
+      background: var(--navy-dark);
+      padding: 16px 32px;
       display: flex;
       align-items: center;
-      gap: 14px;
     }
-    header img { height: 32px; }
-    header h1 {
-      color: #fff;
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
+    header img { height: 36px; }
 
     /* ── Gate cards ─────────────────────────────────────────────────────── */
     .gate-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: calc(100vh - 70px);
+      min-height: calc(100vh - 68px);
       padding: 40px 16px;
     }
     .gate-card {
-      background: #fff;
+      background: var(--white);
       border-radius: 12px;
       box-shadow: 0 4px 24px rgba(0,0,0,.10);
       padding: 44px 48px;
@@ -49,15 +57,19 @@
       max-width: 420px;
       text-align: center;
     }
+    .gate-card .gate-logo {
+      height: 40px;
+      margin-bottom: 28px;
+    }
     .gate-card h2 {
       font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #0b1f3a;
+      color: var(--navy);
     }
     .gate-card p {
       font-size: .9rem;
-      color: #555;
+      color: var(--gray-500);
       margin-bottom: 28px;
       line-height: 1.5;
     }
@@ -66,27 +78,30 @@
     .gate-card input[type="password"] {
       width: 100%;
       padding: 12px 14px;
-      border: 1.5px solid #d0d5dd;
+      border: 1.5px solid var(--gray-200);
       border-radius: 8px;
       font-size: .95rem;
+      font-family: inherit;
       margin-bottom: 14px;
       outline: none;
       transition: border-color .15s;
     }
-    .gate-card input:focus { border-color: #0b6fba; }
+    .gate-card input:focus { border-color: var(--cyan); }
     .gate-card .btn {
       width: 100%;
       padding: 13px;
-      background: #0b6fba;
-      color: #fff;
+      background: var(--navy);
+      color: var(--white);
       border: none;
       border-radius: 8px;
       font-size: .95rem;
-      font-weight: 600;
+      font-family: inherit;
+      font-weight: 700;
       cursor: pointer;
       transition: background .15s;
+      letter-spacing: .02em;
     }
-    .gate-card .btn:hover { background: #0a5fa5; }
+    .gate-card .btn:hover { background: #003d91; }
     .gate-card .btn:disabled { background: #a0bdd8; cursor: default; }
     .error-msg {
       color: #c0392b;
@@ -101,12 +116,16 @@
     #resources-page { display: none; }
 
     .page-header {
-      background: #0b1f3a;
-      color: #fff;
+      background: var(--navy);
+      color: var(--white);
       padding: 32px 48px 28px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
-    .page-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
-    .page-header p  { font-size: .9rem; opacity: .7; }
+    .page-header-logo { height: 32px; flex-shrink: 0; }
+    .page-header-text h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .page-header-text p  { font-size: .9rem; opacity: .75; }
 
     .resources-body {
       max-width: 1100px;
@@ -119,7 +138,7 @@
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: #888;
+      color: var(--navy);
       margin: 32px 0 14px;
     }
     .section-label:first-child { margin-top: 0; }
@@ -131,7 +150,7 @@
     }
 
     .doc-card {
-      background: #fff;
+      background: var(--white);
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,.07);
       padding: 20px 22px;
@@ -143,7 +162,7 @@
       color: inherit;
     }
     .doc-card:hover {
-      box-shadow: 0 6px 20px rgba(0,0,0,.12);
+      box-shadow: 0 6px 20px rgba(0,46,109,.12);
       transform: translateY(-2px);
     }
     .doc-card-top {
@@ -162,50 +181,54 @@
       font-weight: 800;
       letter-spacing: .04em;
       flex-shrink: 0;
-      color: #fff;
+      color: var(--white);
     }
-    .file-icon.pdf  { background: #e74c3c; }
-    .file-icon.pptx { background: #d35400; }
-    .file-icon.docx { background: #2980b9; }
-    .file-icon.xlsx { background: #27ae60; }
-    .file-icon.default { background: #7f8c8d; }
+    .file-icon.pdf    { background: #e74c3c; }
+    .file-icon.pptx   { background: #d35400; }
+    .file-icon.docx   { background: var(--navy); }
+    .file-icon.xlsx   { background: #27ae60; }
+    .file-icon.default{ background: var(--gray-500); }
 
     .doc-name {
       font-size: .9rem;
       font-weight: 600;
       line-height: 1.35;
-      color: #0b1f3a;
+      color: var(--navy);
       flex: 1;
     }
     .doc-meta {
       font-size: .78rem;
-      color: #888;
+      color: var(--gray-500);
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .doc-meta .dot { opacity: .4; }
 
-    .download-btn {
+    .view-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 8px 14px;
-      background: #f0f4f9;
-      color: #0b6fba;
+      background: var(--bg);
+      color: var(--navy);
       border-radius: 6px;
       font-size: .82rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
-      transition: background .15s;
+      transition: background .15s, color .15s;
       align-self: flex-start;
+      letter-spacing: .01em;
     }
-    .download-btn:hover { background: #dae6f5; }
+    .view-btn:hover {
+      background: var(--cyan);
+      color: var(--navy-dark);
+    }
 
     .loading-msg {
       text-align: center;
       padding: 60px;
-      color: #888;
+      color: var(--gray-500);
       font-size: .95rem;
     }
     .empty-msg {
@@ -220,12 +243,14 @@
 
 <!-- ── Header (always visible) ─────────────────────────────────────── -->
 <header>
-  <h1>Synexis Partner Resources</h1>
+  <img src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png" alt="Synexis" />
 </header>
 
 <!-- ── Step 1: Access key ──────────────────────────────────────────── -->
 <div id="step-key" class="gate-wrap">
   <div class="gate-card">
+    <img class="gate-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png"
+         alt="Synexis" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(.5);" />
     <h2>Partner Access</h2>
     <p>Enter the access key provided by your Synexis contact to continue.</p>
     <input type="password" id="key-input" placeholder="Access key" autocomplete="off" />
@@ -237,6 +262,8 @@
 <!-- ── Step 2: Email ────────────────────────────────────────────────── -->
 <div id="step-email" class="gate-wrap" style="display:none">
   <div class="gate-card">
+    <img class="gate-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png"
+         alt="Synexis" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(.5);" />
     <h2>Who's accessing?</h2>
     <p>Enter your name and work email. This helps Synexis keep access current.</p>
     <div class="name-row">
@@ -252,8 +279,11 @@
 <!-- ── Resources page ───────────────────────────────────────────────── -->
 <div id="resources-page">
   <div class="page-header">
-    <h2>Marketing Resources</h2>
-    <p>Click any document to download. All materials are for partner use only.</p>
+    <img class="page-header-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png" alt="Synexis" />
+    <div class="page-header-text">
+      <h2>Partner Resources</h2>
+      <p>All materials are for partner use only.</p>
+    </div>
   </div>
   <div class="resources-body">
     <div id="card-container" class="loading-msg">Loading resources…</div>
@@ -262,7 +292,7 @@
 
 <script>
   // ── Configuration ──────────────────────────────────────────────────
-  const ACCESS_KEY      = "vincit2026";          // rotate this when needed
+  const ACCESS_KEY      = "vincit2026";
   const HS_PORTAL_ID    = "243636346";
   const HS_FORM_GUID    = "29b0a418-3ee2-42de-b613-da1461b333dc";
   const MANIFEST_URL    = "./resources_manifest.json";
@@ -304,7 +334,6 @@
     btn.textContent = "Logging access…";
     errEl.textContent = "";
 
-    // Submit to HubSpot form (v2 endpoint — consistent with training site)
     const fields = [{ name: "email", value: email }];
     if (firstName) fields.push({ name: "firstname", value: firstName });
     if (lastName)  fields.push({ name: "lastname",  value: lastName  });
@@ -319,11 +348,9 @@
         }
       );
     } catch (err) {
-      // Non-blocking — if HubSpot is unreachable, still let the rep through
       console.warn("HubSpot form submission failed:", err);
     }
 
-    // Gate passed
     document.getElementById("step-email").style.display = "none";
     document.getElementById("resources-page").style.display = "block";
     loadResources();
@@ -348,7 +375,6 @@
       return;
     }
 
-    // Group: root files first, then by subfolder
     const rootFiles = files.filter(f => !f.subfolder);
     const subfolders = {};
     files.filter(f => f.subfolder).forEach(f => {
@@ -370,11 +396,11 @@
   }
 
   function cardHTML(file) {
-    const ext   = (file.extension || "").toLowerCase();
-    const size  = formatBytes(file.size_bytes);
-    const icon  = iconLabel(ext);
-    const cls   = ["pdf","pptx","docx","xlsx"].includes(ext) ? ext : "default";
-    const date  = file.updated_at ? new Date(file.updated_at).toLocaleDateString("en-US", { month:"short", year:"numeric" }) : "";
+    const ext  = (file.extension || "").toLowerCase();
+    const size = formatBytes(file.size_bytes);
+    const icon = iconLabel(ext);
+    const cls  = ["pdf","pptx","docx","xlsx"].includes(ext) ? ext : "default";
+    const date = file.updated_at ? new Date(file.updated_at).toLocaleDateString("en-US", { month:"short", year:"numeric" }) : "";
 
     return `
       <div class="doc-card">
@@ -386,8 +412,8 @@
           <span>${size}</span>
           ${date ? `<span class="dot">·</span><span>${date}</span>` : ""}
         </div>
-        <a class="download-btn" href="${escHtml(file.hubspot_url)}" target="_blank" rel="noopener noreferrer">
-          ↓ Download ${ext.toUpperCase()}
+        <a class="view-btn" href="${escHtml(file.hubspot_url)}" target="_blank" rel="noopener noreferrer">
+          View ↗
         </a>
       </div>`;
   }
