@@ -123,7 +123,7 @@
       align-items: center;
       gap: 32px;
     }
-    .page-header-logo { height: 32px; flex-shrink: 0; }
+    .page-header-logo { height: 32px; flex-shrink: 0; } /* ready for Vincit logo */
     .page-header-text h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
     .page-header-text p  { font-size: .9rem; opacity: .75; }
 
@@ -279,7 +279,7 @@
 <!-- ── Resources page ───────────────────────────────────────────────── -->
 <div id="resources-page">
   <div class="page-header">
-    <img class="page-header-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png" alt="Synexis" />
+    <img class="page-header-logo" src="./VINCIT+Logo+Reversed+2025.webp" alt="Vincit" />
     <div class="page-header-text">
       <h2>Partner Resources</h2>
       <p>All materials are for partner use only.</p>
@@ -297,6 +297,20 @@
   const HS_FORM_GUID    = "29b0a418-3ee2-42de-b613-da1461b333dc";
   const MANIFEST_URL    = "./resources_manifest.json";
 
+  // ── Session restore ────────────────────────────────────────────────
+  (function restoreSession() {
+    const state = sessionStorage.getItem("synexis_gate");
+    if (state === "email") {
+      document.getElementById("step-key").style.display   = "none";
+      document.getElementById("step-email").style.display = "flex";
+    } else if (state === "granted") {
+      document.getElementById("step-key").style.display      = "none";
+      document.getElementById("step-email").style.display    = "none";
+      document.getElementById("resources-page").style.display = "block";
+      loadResources();
+    }
+  })();
+
   // ── Step 1: Key check ──────────────────────────────────────────────
   document.getElementById("key-input").addEventListener("keydown", e => {
     if (e.key === "Enter") checkKey();
@@ -305,6 +319,7 @@
   function checkKey() {
     const val = document.getElementById("key-input").value.trim();
     if (val === ACCESS_KEY) {
+      sessionStorage.setItem("synexis_gate", "email");
       document.getElementById("step-key").style.display   = "none";
       document.getElementById("step-email").style.display = "flex";
       document.getElementById("first-name").focus();
@@ -351,6 +366,7 @@
       console.warn("HubSpot form submission failed:", err);
     }
 
+    sessionStorage.setItem("synexis_gate", "granted");
     document.getElementById("step-email").style.display = "none";
     document.getElementById("resources-page").style.display = "block";
     loadResources();
