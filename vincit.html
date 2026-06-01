@@ -123,7 +123,7 @@
       align-items: center;
       gap: 32px;
     }
-    .page-header-logo { height: 32px; flex-shrink: 0; } /* ready for Vincit logo */
+    .page-header-logo { height: 32px; flex-shrink: 0; }
     .page-header-text h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
     .page-header-text p  { font-size: .9rem; opacity: .75; }
 
@@ -259,23 +259,6 @@
   </div>
 </div>
 
-<!-- ── Step 2: Email ────────────────────────────────────────────────── -->
-<div id="step-email" class="gate-wrap" style="display:none">
-  <div class="gate-card">
-    <img class="gate-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png"
-         alt="Synexis" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(.5);" />
-    <h2>Who's accessing?</h2>
-    <p>Enter your name and work email. This helps Synexis keep access current.</p>
-    <div class="name-row">
-      <input type="text" id="first-name" placeholder="First name" />
-      <input type="text" id="last-name"  placeholder="Last name" />
-    </div>
-    <input type="email" id="email-input" placeholder="Work email" />
-    <button class="btn" id="email-btn" onclick="submitEmail()">View Resources</button>
-    <div class="error-msg" id="email-error"></div>
-  </div>
-</div>
-
 <!-- ── Resources page ───────────────────────────────────────────────── -->
 <div id="resources-page">
   <div class="page-header">
@@ -292,26 +275,19 @@
 
 <script>
   // ── Configuration ──────────────────────────────────────────────────
-  const ACCESS_KEY      = "vincit2026";
-  const HS_PORTAL_ID    = "243636346";
-  const HS_FORM_GUID    = "29b0a418-3ee2-42de-b613-da1461b333dc";
-  const MANIFEST_URL    = "./resources_manifest.json";
+  const ACCESS_KEY   = "vincit2026";
+  const MANIFEST_URL = "./resources_manifest.json";
 
   // ── Session restore ────────────────────────────────────────────────
   (function restoreSession() {
-    const state = sessionStorage.getItem("synexis_gate");
-    if (state === "email") {
-      document.getElementById("step-key").style.display   = "none";
-      document.getElementById("step-email").style.display = "flex";
-    } else if (state === "granted") {
-      document.getElementById("step-key").style.display      = "none";
-      document.getElementById("step-email").style.display    = "none";
+    if (sessionStorage.getItem("synexis_gate") === "granted") {
+      document.getElementById("step-key").style.display       = "none";
       document.getElementById("resources-page").style.display = "block";
       loadResources();
     }
   })();
 
-  // ── Step 1: Key check ──────────────────────────────────────────────
+  // ── Key check ─────────────────────────────────────────────────────
   document.getElementById("key-input").addEventListener("keydown", e => {
     if (e.key === "Enter") checkKey();
   });
@@ -319,57 +295,13 @@
   function checkKey() {
     const val = document.getElementById("key-input").value.trim();
     if (val === ACCESS_KEY) {
-      sessionStorage.setItem("synexis_gate", "email");
-      document.getElementById("step-key").style.display   = "none";
-      document.getElementById("step-email").style.display = "flex";
-      document.getElementById("first-name").focus();
+      sessionStorage.setItem("synexis_gate", "granted");
+      document.getElementById("step-key").style.display       = "none";
+      document.getElementById("resources-page").style.display = "block";
+      loadResources();
     } else {
       document.getElementById("key-error").textContent = "Incorrect key — check with your Synexis contact.";
     }
-  }
-
-  // ── Step 2: Email submission ───────────────────────────────────────
-  document.getElementById("email-input").addEventListener("keydown", e => {
-    if (e.key === "Enter") submitEmail();
-  });
-
-  async function submitEmail() {
-    const email     = document.getElementById("email-input").value.trim();
-    const firstName = document.getElementById("first-name").value.trim();
-    const lastName  = document.getElementById("last-name").value.trim();
-    const errEl     = document.getElementById("email-error");
-    const btn       = document.getElementById("email-btn");
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errEl.textContent = "Please enter a valid work email.";
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = "Logging access…";
-    errEl.textContent = "";
-
-    const fields = [{ name: "email", value: email }];
-    if (firstName) fields.push({ name: "firstname", value: firstName });
-    if (lastName)  fields.push({ name: "lastname",  value: lastName  });
-
-    try {
-      await fetch(
-        `https://forms.hubspot.com/uploads/form/v2/${HS_PORTAL_ID}/${HS_FORM_GUID}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ ...Object.fromEntries(fields.map(f => [f.name, f.value])) }),
-        }
-      );
-    } catch (err) {
-      console.warn("HubSpot form submission failed:", err);
-    }
-
-    sessionStorage.setItem("synexis_gate", "granted");
-    document.getElementById("step-email").style.display = "none";
-    document.getElementById("resources-page").style.display = "block";
-    loadResources();
   }
 
   // ── Resource loading ───────────────────────────────────────────────
