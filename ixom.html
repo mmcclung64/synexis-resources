@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synexis Partner Resources</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Brand tokens ──────────────────────────────────────────────────── */
+    :root {
+      --navy:       #002e6d;
+      --navy-dark:  #16292f;
+      --cyan:       #5fd0e0;
+      --bg:         #e8eff0;
+      --gray-100:   #f4f4f4;
+      --gray-200:   #e6e6e6;
+      --gray-500:   #6c757d;
+      --white:      #fff;
+    }
+
+    /* ── Reset & base ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      background: var(--bg);
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* ── Header ────────────────────────────────────────────────────────── */
+    header {
+      background: var(--navy-dark);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+    }
+    header img { height: 36px; }
+
+    /* ── Gate card ──────────────────────────────────────────────────────── */
+    .gate-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 68px);
+      padding: 40px 16px;
+    }
+    .gate-card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      padding: 44px 48px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+    .gate-card .gate-logo {
+      height: 40px;
+      margin-bottom: 28px;
+    }
+    .gate-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+    .gate-card p {
+      font-size: .9rem;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .gate-card input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: .95rem;
+      font-family: inherit;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .gate-card input:focus { border-color: var(--cyan); }
+    .gate-card .btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: .95rem;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s;
+      letter-spacing: .02em;
+    }
+    .gate-card .btn:hover { background: #003d91; }
+    .error-msg {
+      color: #c0392b;
+      font-size: .85rem;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+
+    /* ── Resources page ─────────────────────────────────────────────────── */
+    #resources-page { display: none; }
+
+    .page-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 32px 48px 28px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .page-header-logo { height: 32px; flex-shrink: 0; }
+    .page-header-text h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .page-header-text p  { font-size: .9rem; opacity: .75; }
+
+    .resources-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 32px 64px;
+    }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 32px 0 14px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .doc-card {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: box-shadow .15s, transform .15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .doc-card:hover {
+      box-shadow: 0 6px 20px rgba(0,46,109,.12);
+      transform: translateY(-2px);
+    }
+    .doc-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .file-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+    .file-icon.pdf    { background: #e74c3c; }
+    .file-icon.pptx   { background: #d35400; }
+    .file-icon.docx   { background: var(--navy); }
+    .file-icon.xlsx   { background: #27ae60; }
+    .file-icon.default{ background: var(--gray-500); }
+
+    .doc-name {
+      font-size: .9rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--navy);
+      flex: 1;
+    }
+    .doc-meta {
+      font-size: .78rem;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .doc-meta .dot { opacity: .4; }
+
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--bg);
+      color: var(--navy);
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      align-self: flex-start;
+      letter-spacing: .01em;
+    }
+    .view-btn:hover {
+      background: var(--cyan);
+      color: var(--navy-dark);
+    }
+
+    .loading-msg {
+      text-align: center;
+      padding: 60px;
+      color: var(--gray-500);
+      font-size: .95rem;
+    }
+    .empty-msg {
+      text-align: center;
+      padding: 60px;
+      color: #aaa;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header (always visible) ─────────────────────────────────────── -->
+<header>
+  <img src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png" alt="Synexis" />
+</header>
+
+<!-- ── Step 1: Access key ──────────────────────────────────────────── -->
+<div id="step-key" class="gate-wrap">
+  <div class="gate-card">
+    <img class="gate-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png"
+         alt="Synexis" style="filter: invert(1) sepia(1) saturate(3) hue-rotate(185deg) brightness(.5);" />
+    <h2>Partner Access</h2>
+    <p>Enter the access key provided by your Synexis contact to continue.</p>
+    <input type="password" id="key-input" placeholder="Access key" autocomplete="off" />
+    <button class="btn" id="key-btn" onclick="checkKey()">Continue</button>
+    <div class="error-msg" id="key-error"></div>
+  </div>
+</div>
+
+<!-- ── Resources page ───────────────────────────────────────────────── -->
+<div id="resources-page">
+  <div class="page-header">
+    <img class="page-header-logo" src="https://synexis.com/wp-content/themes/synexis/images/logo-white-horizontal.png" alt="Synexis" />
+    <div class="page-header-text">
+      <h2>Partner Resources</h2>
+      <p>All materials are for partner use only.</p>
+    </div>
+  </div>
+  <div class="resources-body">
+    <div id="card-container" class="loading-msg">Loading resources…</div>
+  </div>
+</div>
+
+<script>
+  // ── Configuration ──────────────────────────────────────────────────
+  const ACCESS_KEY   = "ixom2026";
+  const MANIFEST_URL = "./ixom_manifest.json";
+  const SESSION_KEY  = "synexis_gate_ixom";
+
+  // ── Session restore ────────────────────────────────────────────────
+  (function restoreSession() {
+    if (sessionStorage.getItem(SESSION_KEY) === "granted") {
+      document.getElementById("step-key").style.display       = "none";
+      document.getElementById("resources-page").style.display = "block";
+      loadResources();
+    }
+  })();
+
+  // ── Key check ─────────────────────────────────────────────────────
+  document.getElementById("key-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") checkKey();
+  });
+
+  function checkKey() {
+    const val = document.getElementById("key-input").value.trim();
+    if (val === ACCESS_KEY) {
+      sessionStorage.setItem(SESSION_KEY, "granted");
+      document.getElementById("step-key").style.display       = "none";
+      document.getElementById("resources-page").style.display = "block";
+      loadResources();
+    } else {
+      document.getElementById("key-error").textContent = "Incorrect key — check with your Synexis contact.";
+    }
+  }
+
+  // ── Resource loading ───────────────────────────────────────────────
+  async function loadResources() {
+    const container = document.getElementById("card-container");
+    let manifest;
+    try {
+      const resp = await fetch(MANIFEST_URL + "?t=" + Date.now());
+      if (!resp.ok) throw new Error("manifest not found");
+      manifest = await resp.json();
+    } catch (err) {
+      container.innerHTML = '<div class="empty-msg">Resources unavailable. Please check back soon.</div>';
+      return;
+    }
+
+    const files = manifest.files || [];
+    if (!files.length) {
+      container.innerHTML = '<div class="empty-msg">No resources available yet.</div>';
+      return;
+    }
+
+    const rootFiles = files.filter(f => !f.subfolder);
+    const subfolders = {};
+    files.filter(f => f.subfolder).forEach(f => {
+      (subfolders[f.subfolder] = subfolders[f.subfolder] || []).push(f);
+    });
+
+    let html = "";
+    if (rootFiles.length) {
+      html += `<div class="section-label">Documents</div>`;
+      html += `<div class="card-grid">${rootFiles.map(cardHTML).join("")}</div>`;
+    }
+    for (const [folder, items] of Object.entries(subfolders)) {
+      html += `<div class="section-label">${escHtml(folder)}</div>`;
+      html += `<div class="card-grid">${items.map(cardHTML).join("")}</div>`;
+    }
+
+    container.className = "";
+    container.innerHTML = html;
+  }
+
+  function cardHTML(file) {
+    const ext  = (file.extension || "").toLowerCase();
+    const size = formatBytes(file.size_bytes);
+    const icon = iconLabel(ext);
+    const cls  = ["pdf","pptx","docx","xlsx"].includes(ext) ? ext : "default";
+    const date = file.updated_at ? new Date(file.updated_at).toLocaleDateString("en-US", { month:"short", year:"numeric" }) : "";
+
+    return `
+      <div class="doc-card">
+        <div class="doc-card-top">
+          <div class="file-icon ${cls}">${icon}</div>
+          <div class="doc-name">${escHtml(file.display_name)}</div>
+        </div>
+        <div class="doc-meta">
+          <span>${size}</span>
+          ${date ? `<span class="dot">·</span><span>${date}</span>` : ""}
+        </div>
+        <a class="view-btn" href="${escHtml(file.hubspot_url)}" target="_blank" rel="noopener noreferrer">
+          View ↗
+        </a>
+      </div>`;
+  }
+
+  function iconLabel(ext) {
+    return { pdf:"PDF", pptx:"PPT", ppt:"PPT", docx:"DOC", doc:"DOC", xlsx:"XLS", xls:"XLS" }[ext] || ext.toUpperCase() || "FILE";
+  }
+
+  function formatBytes(bytes) {
+    if (!bytes) return "";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+  }
+
+  function escHtml(str) {
+    return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+</script>
+
+</body>
+</html>
