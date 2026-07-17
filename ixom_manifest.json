@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T19:48:35.100452+00:00",
+  "generated_at": "2026-07-17T13:34:26.730701+00:00",
   "files": [
     {
       "filename": "Device Fact Sheet_1025_Final.pdf",
@@ -81,6 +81,15 @@
       "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Synexis%20Training%20Video%20Catalog%20-%20Module%201.pdf",
       "subfolder": null,
       "updated_at": "2026-05-26T19:24:28Z"
+    },
+    {
+      "filename": "Device Fact Sheet_1025_IXOM.pdf",
+      "display_name": "Device Fact Sheet IXOM",
+      "extension": "pdf",
+      "size_bytes": 567781,
+      "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Device%20Fact%20Sheet_1025_IXOM.pdf",
+      "subfolder": null,
+      "updated_at": "2025-10-28T19:21:15Z"
     }
   ]
 }
