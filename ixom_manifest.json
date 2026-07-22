@@ -1,15 +1,6 @@
 {
-  "generated_at": "2026-07-20T10:08:28.367391+00:00",
+  "generated_at": "2026-07-22T12:49:01.047675+00:00",
   "files": [
-    {
-      "filename": "Device Fact Sheet_1025_Final.pdf",
-      "display_name": "Device Fact Sheet",
-      "extension": "pdf",
-      "size_bytes": 576641,
-      "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Device%20Fact%20Sheet_1025_Final.pdf",
-      "subfolder": null,
-      "updated_at": "2025-10-28T13:32:20Z"
-    },
     {
       "filename": "FP_Protein_One Pager_0925_Final.pdf",
       "display_name": "Food Processing — Protein One Pager",
@@ -90,6 +81,24 @@
       "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Device%20Fact%20Sheet_1025_IXOM.pdf",
       "subfolder": null,
       "updated_at": "2025-10-28T19:21:15Z"
+    },
+    {
+      "filename": "Peer-Reviewed Studies Highlights_Final_0226.pdf",
+      "display_name": "Peer-Reviewed Studies Highlights",
+      "extension": "pdf",
+      "size_bytes": 118624,
+      "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Peer-Reviewed%20Studies%20Highlights_Final_0226.pdf",
+      "subfolder": null,
+      "updated_at": "2026-06-18T15:08:54Z"
+    },
+    {
+      "filename": "Food_Protein Mold & Yeast_Case Study_0726.pdf",
+      "display_name": "Food Protein Mold & Yeast Case Study",
+      "extension": "pdf",
+      "size_bytes": 4892998,
+      "hubspot_url": "https://243636346.fs1.hubspotusercontent-na2.net/hubfs/243636346/Partner%20Resources/IXOM/Food_Protein%20Mold%20&%20Yeast_Case%20Study_0726.pdf",
+      "subfolder": null,
+      "updated_at": "2026-07-20T20:41:15Z"
     }
   ]
 }
